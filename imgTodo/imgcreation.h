@@ -34,8 +34,15 @@ Mat blankImageMatrix(int width, int height);
 *		image is a reference to an image matrix
 *		created with the cv libary
 *
-*		text is a reference to a string variable
-*		that is written onto the matrix image
+*		textArray is a reference to a string array variable
+*		for which its contents are written on to the
+*		given image matrix
+* 
+*		textArrayLength is a reference to an integer variable
+*		that is the length of the input string array
+* 
+*		margintop is a reference to an int variable
+*		that changes the top margin (in pixels) of the text
 *
 *  Postcondition:
 *		cv::Mat image matrix with text written 
@@ -43,22 +50,7 @@ Mat blankImageMatrix(int width, int height);
 *
 */
 
-Mat writeTextToImage(Mat image, string text);
-
-/* Writes text onto cv::Mat image and returns the matrix
-*
-*  Precondition:
-*		image is a reference to an image matrix
-*		created with the cv libary
-*
-*		text is a reference to a string variable
-*		that is written onto the matrix image
-*
-*  Postcondition:
-*		cv::Mat image matrix with text written
-*		is returned by the function
-*
-*/
+Mat writeTextToImage(Mat image, string textArray[], int textArrayLength, int marginTop);
 
 /* Takes cv::Mat image matrix and saves as bitmap file
 *

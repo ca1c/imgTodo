@@ -1,6 +1,8 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include <iostream>
+#include <array>
 #include "imgcreation.h"
 
 using namespace cv;
@@ -11,9 +13,11 @@ Mat blankImageMatrix(int width, int height)
 	return Mat::zeros(width, height, CV_8UC3);
 }
 
-Mat writeTextToImage(Mat image, string text)
+Mat writeTextToImage(Mat image, string textArray[], int textArrayLength, int marginTop)
 {
     Mat imageCopy = image;
+    int listNumber = 1;
+    int currentMarginTop = marginTop;
 
     /*
     * so this little thing here: imageCopy.cols / 2 - 6.6 * text.length()
@@ -29,17 +33,27 @@ Mat writeTextToImage(Mat image, string text)
     * i just do the operation shown above
     */
 
-	putText(imageCopy,
-        text,
-        Point(imageCopy.cols / 2 - 6.6 * text.length(), 50),
-        FONT_HERSHEY_DUPLEX,
-        1.0,
-        CV_RGB(118, 185, 0), //font color
-        2);
+    for (int i = 0; i < textArrayLength; i++) {
+        string listNumString = to_string(listNumber) + ". ";
+        string text = textArray[i];
+        
+
+        putText(imageCopy,
+            listNumString + text,
+            Point(imageCopy.cols / 2 - 6.6 * text.length(), currentMarginTop),
+            FONT_HERSHEY_DUPLEX,
+            1.0,
+            CV_RGB(118, 185, 0), //font color
+            2);
+
+        currentMarginTop += marginTop;
+        listNumber++;
+    }
 
 	return imageCopy;
 }
 
-void saveImage(Mat image, string filePath, string fileName) {
+void saveImage(Mat image, string filePath, string fileName) 
+{
     imwrite(filePath + fileName + ".bmp", image);
 }
