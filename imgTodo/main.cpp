@@ -21,7 +21,7 @@ int main()
 
 	Mat writtenImage = writeTextToImage(image, myList, sizeof(myList) / sizeof(myList[0]), 50);
 	saveImage(writtenImage, "C:\\Users\\talon\\OneDrive\\Desktop\\", "imgTest");
-	imshow("Display Window", writtenImage);
-	waitKey(0);
+	
+	wallpaperPreview(writtenImage);
 	return 0;
 }

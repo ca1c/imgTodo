@@ -82,5 +82,13 @@ void saveImage(Mat image, string filePath, string fileName);
 
 pair<int, int> getDesktopResolution();
 
+/*
+* Opens opencv window preview for given image matrix
+* 
+* image is a reference to an image matrix variable
+*/
+
+void wallpaperPreview(Mat image);
+
 #endif
 

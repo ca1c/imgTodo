@@ -58,6 +58,12 @@ pair<int, int> getDesktopResolution()
     return desktopDimensions;
 }
 
+void wallpaperPreview(Mat image)
+{
+    imshow("Display Window", image);
+    waitKey(0);
+}
+
 void saveImage(Mat image, string filePath, string fileName) 
 {
     imwrite(filePath + fileName + ".bmp", image);
