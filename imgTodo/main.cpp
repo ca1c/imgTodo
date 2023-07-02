@@ -11,7 +11,11 @@ using namespace std;
 
 int main()
 {
-	Mat image = blankImageMatrix(1080, 1920);
+	pair<int, int> desktopResolution = getDesktopResolution();
+	int desktopWidth = desktopResolution.first;
+	int desktopHeight = desktopResolution.second;
+
+	Mat image = blankImageMatrix(desktopHeight, desktopWidth);
 
 	string myList[4] = { "Sweep Floor", "Check Email", "Eat", "Do Dishes" };
 

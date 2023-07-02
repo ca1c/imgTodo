@@ -72,5 +72,15 @@ Mat writeTextToImage(Mat image, string textArray[], int textArrayLength, int mar
 
 void saveImage(Mat image, string filePath, string fileName);
 
+/*
+* gets desktop resolution and returns the width and height
+* in a pair type
+* 
+* width accessed by getDesktopResolution().first;
+* height accessed by getDesktopResolution().second;
+*/
+
+pair<int, int> getDesktopResolution();
+
 #endif
 

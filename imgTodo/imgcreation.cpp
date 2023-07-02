@@ -2,7 +2,9 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 #include <iostream>
-#include <array>
+#include <vector>
+
+#include "wtypes.h"
 #include "imgcreation.h"
 
 using namespace cv;
@@ -22,21 +24,7 @@ Mat writeTextToImage(Mat image, string textArray[], int textArrayLength, int mar
     double fontScale = 1.0;
     int thickness = 2;
 
-    /*
-    * so this little thing here: imageCopy.cols / 2 - 6.6 * text.length()
-    * basically this parameter is for the x position of the text
-    * imageCopy.cols / 2 sets the text to START at the middle (horizontally) of the image
-    * so I did some trial and error until I subtracted the number of columns
-    * that seemed to center the image
-    * then I divided the length of the text by this number
-    * so ultimately it was: text.length() / 100 = 6.6
-    * text.length() was 15 at this point
-    * so now to center the text horizontally
-    * with this particular font and font size
-    * i just do the operation shown above
-    */
-
-    for (int i = 0; i < textArrayLength; i++) {
+    for (int i = 0; i < textArrayLength; ++i) {
         string listNumString = to_string(listNumber) + ". ";
         string text = textArray[i];
         Size textSize = getTextSize(text, fontFace, fontScale, thickness, 0);
@@ -54,6 +42,20 @@ Mat writeTextToImage(Mat image, string textArray[], int textArrayLength, int mar
     }
 
 	return imageCopy;
+}
+
+pair<int, int> getDesktopResolution()
+{
+    RECT desktop;
+    const HWND hDesktop = GetDesktopWindow();
+    GetWindowRect(hDesktop, &desktop);
+
+    pair<int, int> desktopDimensions;
+
+    desktopDimensions.first = desktop.right;
+    desktopDimensions.second = desktop.bottom;
+
+    return desktopDimensions;
 }
 
 void saveImage(Mat image, string filePath, string fileName) 
