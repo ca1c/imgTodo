@@ -90,5 +90,16 @@ pair<int, int> getDesktopResolution();
 
 void wallpaperPreview(Mat image);
 
+/*
+* sets image given in file path to wallpaper
+* 
+* this function also converts a string to a widestring
+* and then converts the widestring to a w_char array
+* this w_char array is used for the path in
+* SystemParametersInfo to set the wallpaper
+*/
+
+void setWallpaper(string imgFilePath);
+
 #endif
 

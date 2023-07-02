@@ -3,6 +3,7 @@
 #include <opencv2/imgproc.hpp>
 #include <iostream>
 #include <vector>
+#include <windows.h>
 
 #include "wtypes.h"
 #include "imgcreation.h"
@@ -64,7 +65,17 @@ void wallpaperPreview(Mat image)
     waitKey(0);
 }
 
+void setWallpaper(string imgFilePath)
+{
+    string file = imgFilePath;
+    wstring widestring = wstring(imgFilePath.begin(), imgFilePath.end());
+    const wchar_t* filename = widestring.c_str();
+    SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, (void*)filename, SPIF_UPDATEINIFILE);
+}
+
 void saveImage(Mat image, string filePath, string fileName) 
 {
     imwrite(filePath + fileName + ".bmp", image);
 }
+
+

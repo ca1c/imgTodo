@@ -17,11 +17,14 @@ int main()
 
 	Mat image = blankImageMatrix(desktopHeight, desktopWidth);
 
-	string myList[4] = { "Sweep Floor", "Check Email", "Eat", "Do Dishes" };
+	string myList[4] = { "Do Dishes", "Clean Room", "Do Homework", "Schedule Appointment"};
 
 	Mat writtenImage = writeTextToImage(image, myList, sizeof(myList) / sizeof(myList[0]), 50);
-	saveImage(writtenImage, "C:\\Users\\talon\\OneDrive\\Desktop\\", "imgTest");
-	
-	wallpaperPreview(writtenImage);
+
+	string filePath = "C:\\Users\\talon\\OneDrive\\Desktop\\";
+	string fileName = "imgTest";
+
+	saveImage(writtenImage, filePath, fileName);
+	setWallpaper(filePath + fileName + ".bmp");
 	return 0;
 }
