@@ -18,6 +18,9 @@ Mat writeTextToImage(Mat image, string textArray[], int textArrayLength, int mar
     Mat imageCopy = image;
     int listNumber = 1;
     int currentMarginTop = marginTop;
+    int fontFace = FONT_HERSHEY_DUPLEX;
+    double fontScale = 1.0;
+    int thickness = 2;
 
     /*
     * so this little thing here: imageCopy.cols / 2 - 6.6 * text.length()
@@ -36,15 +39,15 @@ Mat writeTextToImage(Mat image, string textArray[], int textArrayLength, int mar
     for (int i = 0; i < textArrayLength; i++) {
         string listNumString = to_string(listNumber) + ". ";
         string text = textArray[i];
-        
+        Size textSize = getTextSize(text, fontFace, fontScale, thickness, 0);
 
         putText(imageCopy,
             listNumString + text,
-            Point(imageCopy.cols / 2 - 6.6 * text.length(), currentMarginTop),
-            FONT_HERSHEY_DUPLEX,
-            1.0,
+            Point(imageCopy.cols / 2 - textSize.width / 2, currentMarginTop),
+            fontFace,
+            fontScale,
             CV_RGB(118, 185, 0), //font color
-            2);
+            thickness);
 
         currentMarginTop += marginTop;
         listNumber++;
