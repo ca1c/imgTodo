@@ -14,17 +14,36 @@ int main()
 	pair<int, int> desktopResolution = getDesktopResolution();
 	int desktopWidth = desktopResolution.first;
 	int desktopHeight = desktopResolution.second;
-
 	Mat image = blankImageMatrix(desktopHeight, desktopWidth);
 
-	string myList[4] = { "Do Dishes", "Clean Room", "Do Homework", "Schedule Appointment"};
+	string todoList[100];
+	string currentItem;
 
-	Mat writtenImage = writeTextToImage(image, myList, sizeof(myList) / sizeof(myList[0]), 50);
+	cout << "Enter todo list item or (q for quit): ";
+	getline(cin, currentItem);
 
-	string filePath = "C:\\Users\\talon\\OneDrive\\Desktop\\";
-	string fileName = "imgTest";
+	int i = 0;
+	while (currentItem != "q") {
+		todoList[i] = currentItem;
+		i++;
+
+		cout << "Enter todo list item or (q for quit): ";
+		getline(cin, currentItem);
+	}
+
+	Mat writtenImage = writeTextToImage(image, todoList, i, 50);
+
+	string filePath;
+	string fileName;
+
+	cout << "Enter the path to save the image (C:\\Users\\You\\images\\): ";
+	cin >> filePath;
+
+	cout << "Enter the filename (no spaces): ";
+	cin >> fileName;
 
 	saveImage(writtenImage, filePath, fileName);
 	setWallpaper(filePath + fileName + ".bmp");
 	return 0;
 }
+
